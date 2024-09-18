@@ -1,16 +1,16 @@
 import Link from 'next/link';
+import '../Layout.css';  
 
 const Layout = ({ children, user }) => {
   return (
-    <html>
-      <body>
-      <div>
-      <header>
+    <>
+      <header className="header">
         <div className="logo">Logo del Sitio</div>
-        <nav>
+        <nav className="nav">
           <Link href="/">Home</Link>
           <Link href="/login">Login</Link>
-          <Link href="/registro">registrarme</Link>
+          <Link href="/registro">Registrarme</Link>
+          <Link href="/eventosdetalle">Detalle Eventos</Link>
           {user && (
             <div className="user-info">
               <span>{user.name}</span>
@@ -19,13 +19,12 @@ const Layout = ({ children, user }) => {
           )}
         </nav>
       </header>
-      <main>{children}</main>
-      <footer>Pie de página</footer>
-    </div>
-    </body>
-    </html>
+      <main className="main-content">{children}</main>
+      <footer className="footer">Pie de página</footer>
+    </>
   );
 };
 
 export default Layout;
+
 

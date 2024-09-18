@@ -1,11 +1,8 @@
-import Layout from '../app/layout.js'
+import Layout from '../layout/layout.js'
 
 const Home = () => {
   return (
-    <Layout>
       <h1>Listado de Eventos</h1>
-      {/* Aquí irá el contenido de los eventos */}
-    </Layout>
   );
 };
 
