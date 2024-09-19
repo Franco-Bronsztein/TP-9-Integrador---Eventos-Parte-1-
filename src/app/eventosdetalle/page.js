@@ -1,4 +1,4 @@
-import Layout from '../layout/layout.js'
+
 
 const EventDetail = () => {
   return (

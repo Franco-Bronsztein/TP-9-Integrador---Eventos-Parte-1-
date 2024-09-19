@@ -1,7 +1,12 @@
+import Layout from "../../../layout";
 
 const Registro = () => {
   return (
-      <h1>Registro de Usuario</h1>
+    <>
+    <Layout></Layout>
+    <h1>Registro de Usuario</h1>
+    </>
+      
   );
 };
 

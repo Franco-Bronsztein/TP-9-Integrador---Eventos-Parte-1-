@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import '../Layout.css';  
+import './src/app/page.module.css'
 
 const Layout = ({ children, user }) => {
   return (

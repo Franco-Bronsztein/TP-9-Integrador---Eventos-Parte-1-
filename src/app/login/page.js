@@ -1,4 +1,4 @@
-import Layout from '../layout/layout.js';
+
 import styles from './page.module.css';
 
 const Login = () => {
