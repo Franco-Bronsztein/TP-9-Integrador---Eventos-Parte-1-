@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+import styles from './page.module.css'; 
 import Link from 'next/link';
 
 
@@ -9,6 +9,7 @@ const Layout = ({ children, user }) => {
         <body>
           <header className={styles.header}>
             <div className={styles.logo}>Logo del Sitio</div>
+            
             <nav className={styles.nav}>
               <Link href="/">Home</Link>
               <Link href="/login">Login</Link>
