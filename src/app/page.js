@@ -7,7 +7,7 @@ const Home = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3002/api/events')
+    fetch('http://localhost:3000/api/events')
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error('Error fetching events:', error));

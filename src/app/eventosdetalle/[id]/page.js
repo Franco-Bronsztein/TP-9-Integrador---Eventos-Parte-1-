@@ -10,7 +10,7 @@ const EventDetail = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3002/api/event/${id}`)
+      fetch(`http://localhost:3000/api/event/${id}`)
         .then((res) => res.json())
         .then((data) => setEvent(data));
     }
