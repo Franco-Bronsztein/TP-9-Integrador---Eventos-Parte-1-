@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Layout from '../layout';
@@ -14,22 +15,23 @@ const Registro = () => {
   const [success, setSuccess] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
 
-      if (!response.ok) {
-        throw new Error('Error al registrarse, intente nuevamente.');
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      const usuarioExistente = usuarios.find((user) => user.email === formData.email);
+
+      if (usuarioExistente) {
+        throw new Error('Este correo ya está registrado. Intente con otro.');
       }
 
+      usuarios.push(formData);
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
       setSuccess(true);
-      setTimeout(() => router.push('/login'), 2000); // Redirigir al login después de 2s
+      setTimeout(() => router.push('/login'), 2000);
     } catch (err) {
       setError(err.message);
     }
@@ -40,7 +42,11 @@ const Registro = () => {
       <div className={styles.registroContainer}>
         <h2 className={styles.title}>Registrarse</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>Registro exitoso, redirigiendo al login...</p>}
+        {success && (
+          <p style={{ color: 'green' }}>
+            Registro exitoso. Redirigiendo a la pantalla de inicio de sesión...
+          </p>
+        )}
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"

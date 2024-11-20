@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import styles from "./eventosdetalle.module.css"; 
 
 const EventDetail = ({ params }) => {
-  const { id } = params; // Obtén el ID desde los parámetros de la URL
+  const { id } = params;
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,30 +26,26 @@ const EventDetail = ({ params }) => {
     fetchEvent();
   }, [id]);
 
-
   if (loading) {
-    return <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando evento...</p>;
+    return <p className={styles.loading}>Cargando evento...</p>;
   }
-
 
   if (error) {
-    return <p style={{ textAlign: "center", marginTop: "2rem", color: "red" }}>Error: {error}</p>;
+    return <p className={styles.error}>Error: {error}</p>;
   }
-
 
   if (!event) {
-    return <p style={{ textAlign: "center", marginTop: "2rem" }}>No se encontró el evento.</p>;
+    return <p className={styles.empty}>No se encontró el evento.</p>;
   }
 
-
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>{event.name}</h1>
-      <p>{event.description}</p>
-      <p>Fecha de inicio: {event.start_date}</p>
-      <p>Duración: {event.duration_in_minutes} minutos</p>
-      <p>Precio: ${event.price}</p>
-      <p>Capacidad máxima: {event.max_assistance}</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>{event.name}</h1>
+      <p className={styles.description}>{event.description}</p>
+      <p className={styles.info}>Fecha de inicio: {event.start_date}</p>
+      <p className={styles.info}>Duración: {event.duration_in_minutes} minutos</p>
+      <p className={styles.info}>Precio: ${event.price}</p>
+      <p className={styles.info}>Capacidad máxima: {event.max_assistance}</p>
     </div>
   );
 };

@@ -1,32 +1,31 @@
-'use client';
+"use client";
 
-import { createContext, useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/navigation';
+import { createContext, useContext, useState, useEffect } from "react";
 
-const UserContext = createContext(null);
+const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const router = useRouter();
+  const [user, setUser] = useState(null); // Estado del usuario
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setUser({ token });  // Asegúrate de solo almacenar el token o el objeto completo que necesitas
-    }
-  }, []);
-
-  const login = async (token) => {
-    localStorage.setItem('token', token);
-    setUser({ token });  // Solo guarda el token si solo lo necesitas
-    router.push('/'); // Redirigir al Home
+  // Función para iniciar sesión y guardar en localStorage
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData)); // Guardar en localStorage
   };
 
+  // Función para cerrar sesión y limpiar localStorage
   const logout = () => {
-    localStorage.removeItem('token');
     setUser(null);
-    router.push('/login');
+    localStorage.removeItem("user"); // Eliminar del localStorage
   };
+
+  // Cargar el usuario desde localStorage al montar el componente
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Establecer el usuario desde localStorage
+    }
+  }, []); // Solo se ejecuta una vez al montar
 
   return (
     <UserContext.Provider value={{ user, login, logout }}>
@@ -35,11 +34,5 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-
-export const useUserContext = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error('useUserContext debe ser usado dentro de UserProvider');
-  }
-  return context;
-};
+// Hook personalizado para usar el contexto del usuario
+export const useUserContext = () => useContext(UserContext);

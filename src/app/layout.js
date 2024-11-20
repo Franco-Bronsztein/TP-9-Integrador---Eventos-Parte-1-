@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import { UserProvider, useUserContext } from './context/UserContext';
-import styles from './page.module.css'; 
+import styles from './page.module.css';
 import Link from 'next/link';
 
 export const Layout = ({ children }) => {
@@ -22,12 +22,13 @@ const LayoutContent = ({ children }) => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>  <img src="/img.JPEG" alt="Logo del Sitio" className={styles.logoImage} /></div>
-        
+        <div className={styles.logo}>
+          <img src="/img.JPEG" alt="Logo del Sitio" className={styles.logoImage} />
+        </div>
+
         <nav className={styles.nav}>
-          <Link href="/">Home</Link>
-          <Link href="/eventosdetalle">Detalle Eventos</Link>
-          
+          <Link href="/" className={styles.link}>Home</Link>
+
           {!user ? (
             <>
               <Link href="/login" className={styles.link}>Login</Link>
@@ -43,11 +44,9 @@ const LayoutContent = ({ children }) => {
       </header>
 
       <main className={styles.mainContent}>
-        <div className={styles.eventList}>
-          {children} {/* Este es el contenido principal, como la lista de eventos o detalles */}
-        </div>
+        {children}
       </main>
-      
+
       <footer className={styles.footer}>
         <p>© 2024 Logo del Sitio. Todos los derechos reservados.</p>
       </footer>

@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/event"); // Prefijo http:// agregado
+        const res = await fetch("http://localhost:3000/api/event")
         if (!res.ok) throw new Error("Error al obtener los eventos");
         const data = await res.json();
         setEvents(data);
@@ -52,7 +52,6 @@ const Home = () => {
                 Duración: {event.duration_in_minutes} minutos
               </p>
               <p className={styles.eventPrice}>Precio: ${event.price}</p>
-              {/* Uso directo de Link sin <a> */}
               <Link href={`/eventosdetalle/${event.id}`} className={styles.link}>
                 Ver Detalle
               </Link>
