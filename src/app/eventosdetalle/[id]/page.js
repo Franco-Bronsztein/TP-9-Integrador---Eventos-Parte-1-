@@ -1,26 +1,48 @@
-// src/app/eventosdetalle/[id]/page.js
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-const EventDetail = () => {
-  const { query } = useRouter(); // Usamos useRouter para acceder a los parámetros
-  const { id } = query; // Obtenemos el id de la URL
+const EventDetail = ({ params }) => {
+  const { id } = params;
   const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      fetch(`http://localhost:3000/api/event/${id}`)
-        .then((res) => res.json())
-        .then((data) => setEvent(data));
-    }
+    const fetchEvent = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/event/${id}`);
+        if (!res.ok) throw new Error("Error al cargar el evento");
+        const data = await res.json();
+        setEvent(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvent();
   }, [id]);
 
-  if (!event) return <p>Loading...</p>;
+
+  if (loading) {
+    return <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando evento...</p>;
+  }
+
+
+  if (error) {
+    return <p style={{ textAlign: "center", marginTop: "2rem", color: "red" }}>Error: {error}</p>;
+  }
+
+
+  if (!event) {
+    return <p style={{ textAlign: "center", marginTop: "2rem" }}>No se encontró el evento.</p>;
+  }
+
 
   return (
-    <div>
+    <div style={{ padding: "2rem" }}>
       <h1>{event.name}</h1>
       <p>{event.description}</p>
       <p>Fecha de inicio: {event.start_date}</p>

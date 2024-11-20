@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import styles from './page.module.css';
-import Layout from './layout';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import styles from "./page.module.css";
+import Layout from "./layout";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -13,8 +13,8 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch('/api/events');
-        if (!res.ok) throw new Error('Error al obtener los eventos');
+        const res = await fetch("http://localhost:3000/api/event"); // Prefijo http:// agregado
+        if (!res.ok) throw new Error("Error al obtener los eventos");
         const data = await res.json();
         setEvents(data);
       } catch (err) {
@@ -41,18 +41,25 @@ const Home = () => {
 
   return (
     <Layout>
-    <div className={styles.homeContainer}>
-      <h1 className={styles.title}>Listado de Eventos</h1>
-      <ul className={styles.eventList}>
-        {events.map((event) => (
-          <li key={event.id} className={styles.eventItem}>
-            <h2 className={styles.eventName}>{event.name}</h2>
-            <p className={styles.eventDescription}>{event.description}</p>
-            <Link href={`/eventosdetalle/${event.id}`}>Ver Detalle</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className={styles.homeContainer}>
+        <h1 className={styles.title}>Listado de Eventos</h1>
+        <ul className={styles.eventList}>
+          {events.map((event) => (
+            <li key={event.id} className={styles.eventItem}>
+              <h2 className={styles.eventName}>{event.name}</h2>
+              <p className={styles.eventDescription}>{event.description}</p>
+              <p className={styles.eventDuration}>
+                Duración: {event.duration_in_minutes} minutos
+              </p>
+              <p className={styles.eventPrice}>Precio: ${event.price}</p>
+              {/* Uso directo de Link sin <a> */}
+              <Link href={`/eventosdetalle/${event.id}`} className={styles.link}>
+                Ver Detalle
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </Layout>
   );
 };
