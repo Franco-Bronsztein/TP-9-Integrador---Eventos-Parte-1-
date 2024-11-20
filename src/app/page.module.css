@@ -1,48 +1,117 @@
-.homeContainer {
+/* page.module.css */
+
+.header {
+  background-color: #007BFF;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoImage {
+  height: 50px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 520;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav a:hover {
+  background-color: #00acc1;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.button {
+  background-color: #00acc1;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #007BFF;
+}
+
+.mainContent {
+  background-color: white;
+  padding: 40px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el footer */
+.footer {
+  background-color: #00acc1;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
 }
 
-.title {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
 }
 
+/* Estilo de los enlaces de navegación */
+.link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.link:hover {
+  background-color: #b2ebf2;
+}
+
+/* Estilo para la lista de eventos */
 .eventList {
-  list-style: none;
   padding: 0;
+  list-style: none;
 }
 
 .eventItem {
-  margin-bottom: 20px;
-  padding: 15px;
+  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.eventItem:hover {
+  background-color: #b2ebf2;
+  transition: background-color 0.3s;
 }
 
 .eventName {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #444;
+  margin-bottom: 10px;
 }
 
 .eventDescription {
   color: #666;
-}
-
-.link {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-.loading,
-.error,
-.empty {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #999;
 }

@@ -1,6 +1,7 @@
-// src/context/UserContext.js
+'use client';
+
 import { createContext, useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const UserContext = createContext(null);
 
@@ -11,30 +12,14 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setUser({ token });
+      setUser({ token });  // Asegúrate de solo almacenar el token o el objeto completo que necesitas
     }
   }, []);
 
-  const login = async (username, password) => {
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await res.json();
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        setUser({ token: data.token });
-        router.push('/'); // Redirigir a la página Home
-      } else {
-        alert('Error al iniciar sesión');
-      }
-    } catch (error) {
-      console.error('Error en login:', error);
-    }
+  const login = async (token) => {
+    localStorage.setItem('token', token);
+    setUser({ token });  // Solo guarda el token si solo lo necesitas
+    router.push('/'); // Redirigir al Home
   };
 
   const logout = () => {
@@ -50,4 +35,11 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-export const useUserContext = () => useContext(UserContext);
+
+export const useUserContext = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUserContext debe ser usado dentro de UserProvider');
+  }
+  return context;
+};

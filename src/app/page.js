@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './page.module.css';
+import Layout from './layout';
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -39,6 +40,7 @@ const Home = () => {
   }
 
   return (
+    <Layout>
     <div className={styles.homeContainer}>
       <h1 className={styles.title}>Listado de Eventos</h1>
       <ul className={styles.eventList}>
@@ -46,13 +48,12 @@ const Home = () => {
           <li key={event.id} className={styles.eventItem}>
             <h2 className={styles.eventName}>{event.name}</h2>
             <p className={styles.eventDescription}>{event.description}</p>
-            <Link href={`/eventosdetalle/${event.id}`}>
-              <a className={styles.link}>Ver Detalle</a>
-            </Link>
+            <Link href={`/eventosdetalle/${event.id}`}>Ver Detalle</Link>
           </li>
         ))}
       </ul>
     </div>
+    </Layout>
   );
 };
 

@@ -1,11 +1,12 @@
 // src/app/eventosdetalle/[id]/page.js
 "use client";
 
-import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const EventDetail = () => {
-  const { id } = useParams(); // Obtén el id del evento
+  const { query } = useRouter(); // Usamos useRouter para acceder a los parámetros
+  const { id } = query; // Obtenemos el id de la URL
   const [event, setEvent] = useState(null);
 
   useEffect(() => {

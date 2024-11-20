@@ -1,6 +1,7 @@
 'use client';
+
 import { useState } from 'react';
-import { useUserContext } from '../Context/UserContext';
+import { useUserContext } from '../context/UserContext';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Layout from '../layout';
@@ -15,7 +16,6 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Simulación de una llamada a la API de autenticación
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ const Login = () => {
     <Layout>
       <div className={styles.loginContainer}>
         <h2 className={styles.title}>Iniciar Sesión</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Mostrar errores */}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
