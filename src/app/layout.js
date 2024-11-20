@@ -4,7 +4,7 @@ import { UserProvider, useUserContext } from './context/UserContext';
 import styles from './page.module.css'; 
 import Link from 'next/link';
 
-const Layout = ({ children }) => {
+export const Layout = ({ children }) => {
   return (
     <html lang="es">
       <body>

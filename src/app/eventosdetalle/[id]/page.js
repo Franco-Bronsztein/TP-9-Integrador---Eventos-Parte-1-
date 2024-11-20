@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const EventDetail = ({ params }) => {
-  const { id } = params;
+  const { id } = params; // Obtén el ID desde los parámetros de la URL
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
