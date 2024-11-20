@@ -1,16 +1,51 @@
+'use client';
+import { useState } from 'react';
+import { useUserContext } from '../Context/UserContext';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Layout from '../layout';
 
 const Login = () => {
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const { login } = useUserContext();
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Simulación de una llamada a la API de autenticación
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Credenciales incorrectas');
+      }
+
+      const { token } = await response.json();
+      login(token); // Guarda el token en el contexto y localStorage
+      router.push('/'); // Redirige a Home
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <Layout>
       <div className={styles.loginContainer}>
         <h2 className={styles.title}>Iniciar Sesión</h2>
-        <form action="/ruta-al-servidor" method="POST" className={styles.form}>
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Mostrar errores */}
+        <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
             name="username"
             placeholder="Nombre de usuario"
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
             required
             className={styles.input}
           />
@@ -18,6 +53,8 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Contraseña"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             required
             className={styles.input}
           />
