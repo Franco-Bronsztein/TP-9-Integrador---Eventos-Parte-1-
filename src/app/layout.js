@@ -3,6 +3,8 @@
 import { UserProvider, useUserContext } from './context/UserContext';
 import styles from './page.module.css';
 import Link from 'next/link';
+import img from './../public/imagensitio.jpg';
+import Image from 'next/image';
 
 export const Layout = ({ children }) => {
   return (
@@ -23,24 +25,24 @@ const LayoutContent = ({ children }) => {
     <>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <img src="/img.JPEG" alt="Logo del Sitio" className={styles.logoImage} />
+          <Image src={img} alt="Logo del Sitio" className={styles.logoImage} />
         </div>
 
         <nav className={styles.nav}>
-          <Link href="/" className={styles.link}>Home</Link>
+  <Link href="/" className={styles.link}>Home</Link>
 
-          {!user ? (
-            <>
-              <Link href="/login" className={styles.link}>Login</Link>
-              <Link href="/registro" className={styles.link}>Registrarme</Link>
-            </>
-          ) : (
-            <div className={styles.userInfo}>
-              <span>{user.name || 'Usuario'}</span>
-              <button className={styles.button} onClick={logout}>Cerrar Sesión</button>
-            </div>
-          )}
-        </nav>
+  {!user ? (
+    <>
+      <Link href="/login" className={styles.link}>Login</Link>
+      <Link href="/registro" className={styles.link}>Registrarme</Link>
+    </>
+  ) : (
+    <div className={styles.userInfo}>
+      <Link href="/perfil" className={styles.link}>Perfil</Link>
+      <button className={styles.button} onClick={logout}>Cerrar Sesión</button>
+    </div>
+  )}
+</nav>
       </header>
 
       <main className={styles.mainContent}>

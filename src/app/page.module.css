@@ -71,7 +71,6 @@
   font-size: 1rem;
 }
 
-/* Estilo de los enlaces de navegación */
 .link {
   color: white;
   text-decoration: none;
@@ -85,7 +84,7 @@
   background-color: #b2ebf2;
 }
 
-/* Estilo para la página de inicio (Home) */
+
 .homeContainer {
   max-width: 1200px;
   margin: 0 auto;
