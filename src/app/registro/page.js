@@ -44,7 +44,7 @@ const Registro = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && (
           <p style={{ color: 'green' }}>
-            Registro exitoso. Redirigiendo a la pantalla de inicio de sesión...
+            Registro exitoso...
           </p>
         )}
         <form onSubmit={handleSubmit} className={styles.form}>
